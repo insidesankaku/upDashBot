@@ -4,16 +4,16 @@
 
     <div class="row" v-if="!selectedChatId">
       <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+        <img class="up-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Upwork-logo.svg/2560px-Upwork-logo.svg.png" alt="upwork-logo">
         <h5 class="font-weight-bold mb-3 text-center text-lg-start">
-          Upwork Chats:
+          Your Chats:
         </h5>
 
         <ul class="list-unstyled mb-0">
           <li
             v-for="item in list"
             :key="item.id"
-            class="p-2 border-bottom"
-            style="background-color: #eee"
+            class="p-2 border-bottom up-chat-item"
             @click="openChat(item.node.id)"
           >
             <a href="#!" class="d-flex justify-content-between">
@@ -88,6 +88,13 @@ export default {
 </script>
 
 <style scoped>
+.up-chat-item:hover{
+    background-color: #eee
+}
+.up-logo {
+    width: 100px;
+}
+
 #loading {
   position: absolute;
   top: 50%;
