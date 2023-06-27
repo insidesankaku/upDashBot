@@ -101,7 +101,7 @@ export default {
   mounted() {
     fetch(
       "https://ea9c-78-162-150-126.ngrok-free.app/rooms/" +
-        this.chatId +
+        this.chatId + '?' +
         new URLSearchParams({
           token: "Bearer oauth2v2_7a4e0222c15d0a66af69759ad21d7730",
         }),
