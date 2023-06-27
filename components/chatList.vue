@@ -6,8 +6,6 @@
           Upwork Chats:
         </h5>
 
-        <div class="card">
-          <div class="card-body">
             <ul class="list-unstyled mb-0">
               <li
                 v-for="item in list"
@@ -38,9 +36,6 @@
             </ul>
           </div>
         </div>
-      </div>
-    </div>
-
     <chat
       :chatId="selectedChatId"
       v-if="selectedChatId"
@@ -142,7 +137,8 @@ export default {
     fetch("https://76eb-78-162-150-126.ngrok-free.app/rooms?" + new URLSearchParams({ token: "Bearer oauth2v2_7a4e0222c15d0a66af69759ad21d7730"}), {
       method: "GET",
      headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type'
       }
     }).then((response) => response.json())
       .then((response) => console.log(response))
