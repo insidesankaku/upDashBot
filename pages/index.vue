@@ -6,7 +6,6 @@
 
 <script>
 import chatList from '../components/chatList.vue'
-
 export default {
   components: {
     chatList
