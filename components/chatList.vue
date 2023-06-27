@@ -4,9 +4,12 @@
 
     <div class="row" v-if="!selectedChatId">
       <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
-        <img class="up-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Upwork-logo.svg/2560px-Upwork-logo.svg.png" alt="upwork-logo">
         <h5 class="font-weight-bold mb-3 text-center text-lg-start">
-          Your Chats:
+          <img
+            class="up-logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Upwork-logo.svg/2560px-Upwork-logo.svg.png"
+            alt="upwork-logo"
+          />
         </h5>
 
         <ul class="list-unstyled mb-0">
@@ -88,11 +91,11 @@ export default {
 </script>
 
 <style scoped>
-.up-chat-item:hover{
-    background-color: #eee
+.up-chat-item:hover {
+  background-color: #eee;
 }
 .up-logo {
-    width: 100px;
+  width: 100px;
 }
 
 #loading {
