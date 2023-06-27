@@ -1,89 +1,88 @@
 <template>
-    <div class="col-md-6 col-lg-7 col-xl-8" >
+  <div class="col-md-6 col-lg-7 col-xl-8">
     <button class="btn btn-info back-btn" @click="goBack()">Back</button>
-      <ul class="list-unstyled">
-        <li class="d-flex justify-content-between mb-4">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-            alt="avatar"
-            class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-            width="60"
-          />
-          <div class="card">
-            <div class="card-header d-flex justify-content-between p-3">
-              <p class="fw-bold mb-0">Brad Pitt</p>
-              <p class="text-muted small mb-0">
-                <i class="far fa-clock"></i> 12 mins ago
-              </p>
-            </div>
-            <div class="card-body">
-              <p class="mb-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
+    <ul class="list-unstyled">
+      <li class="d-flex justify-content-between mb-4">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+          alt="avatar"
+          class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+          width="60"
+        />
+        <div class="card">
+          <div class="card-header d-flex justify-content-between p-3">
+            <p class="fw-bold mb-0">Brad Pitt</p>
+            <p class="text-muted small mb-0">
+              <i class="far fa-clock"></i> 12 mins ago
+            </p>
           </div>
-        </li>
-        <li class="d-flex justify-content-between mb-4">
-          <div class="card w-100">
-            <div class="card-header d-flex justify-content-between p-3">
-              <p class="fw-bold mb-0">Lara Croft</p>
-              <p class="text-muted small mb-0">
-                <i class="far fa-clock"></i> 13 mins ago
-              </p>
-            </div>
-            <div class="card-body">
-              <p class="mb-0">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium.
-              </p>
-            </div>
+          <div class="card-body">
+            <p class="mb-0">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
           </div>
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp"
-            alt="avatar"
-            class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong"
-            width="60"
-          />
-        </li>
-        <li class="d-flex justify-content-between mb-4">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-            alt="avatar"
-            class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-            width="60"
-          />
-          <div class="card">
-            <div class="card-header d-flex justify-content-between p-3">
-              <p class="fw-bold mb-0">Brad Pitt</p>
-              <p class="text-muted small mb-0">
-                <i class="far fa-clock"></i> 10 mins ago
-              </p>
-            </div>
-            <div class="card-body">
-              <p class="mb-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
+        </div>
+      </li>
+      <li class="d-flex justify-content-between mb-4">
+        <div class="card w-100">
+          <div class="card-header d-flex justify-content-between p-3">
+            <p class="fw-bold mb-0">Lara Croft</p>
+            <p class="text-muted small mb-0">
+              <i class="far fa-clock"></i> 13 mins ago
+            </p>
           </div>
-        </li>
-        <li class="bg-white mb-3">
-          <div class="form-outline">
-            <textarea
-              class="form-control"
-              id="textAreaExample2"
-              rows="4"
-            ></textarea>
-            <label class="form-label" for="textAreaExample2">Message</label>
+          <div class="card-body">
+            <p class="mb-0">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium.
+            </p>
           </div>
-        </li>
-        <button type="button" class="btn btn-info btn-rounded float-end">
-          Send
-        </button>
-      </ul>
-    </div>
-
+        </div>
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp"
+          alt="avatar"
+          class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong"
+          width="60"
+        />
+      </li>
+      <li class="d-flex justify-content-between mb-4">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+          alt="avatar"
+          class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+          width="60"
+        />
+        <div class="card">
+          <div class="card-header d-flex justify-content-between p-3">
+            <p class="fw-bold mb-0">Brad Pitt</p>
+            <p class="text-muted small mb-0">
+              <i class="far fa-clock"></i> 10 mins ago
+            </p>
+          </div>
+          <div class="card-body">
+            <p class="mb-0">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li class="bg-white mb-3">
+        <div class="form-outline">
+          <textarea
+            class="form-control"
+            id="textAreaExample2"
+            rows="4"
+          ></textarea>
+          <label class="form-label" for="textAreaExample2">Message</label>
+        </div>
+      </li>
+      <button type="button" class="btn btn-info btn-rounded float-end">
+        Send
+      </button>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -96,16 +95,31 @@ export default {
   },
   methods: {
     goBack() {
-       this.$emit('goBack', true);
-    }
+      this.$emit("goBack", true);
+    },
   },
   mounted() {
-    console.log("load chat ", this.chatId);
+    fetch(
+      "https://ea9c-78-162-150-126.ngrok-free.app/rooms/" +
+        this.chatId +
+        new URLSearchParams({
+          token: "Bearer oauth2v2_7a4e0222c15d0a66af69759ad21d7730",
+        }),
+      {
+        method: "GET",
+        headers: {
+          "ngrok-skip-browser-warning": true,
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
   },
 };
 </script>
 <style scoped>
 .back-btn {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 </style>
