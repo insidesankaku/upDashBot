@@ -53,95 +53,17 @@ export default {
   data() {
     return {
       selectedChatId: null,
-      list: [
-        {
-          node: {
-            id: "room_2f351115151d45cea2c9a6ae5cd37918",
-            roomName: "Randolph Rosenbaum",
-            topic: "Forward Mobility Analyst",
-          },
-        },
-        {
-          node: {
-            id: "room_a7bd1c7352e0c6fd95015f1dee7e49ff",
-            roomName: "Randolph Rosenbaum",
-            topic: "Forward Mobility Analyst",
-          },
-        },
-        {
-          node: {
-            id: "room_7c7ec3a47e9e1a5f2d353e8c0f71d856",
-            roomName: "Latonya Frami",
-            topic: "Forward Mobility Analyst",
-          },
-        },
-        {
-          node: {
-            id: "room_d1620ebce59ced4e65959a3cea8bd3fd",
-            roomName: "Jewell Bednar",
-            topic: "Forward Mobility Analyst",
-          },
-        },
-        {
-          node: {
-            id: "room_6c046a6b92578bb4484d3265b5d0a1e0",
-            roomName: "Jewell Bednar",
-            topic: "Forward Mobility Analyst",
-          },
-        },
-        {
-          node: {
-            id: "room_224a070ea9ccd4767dafb34ad53e2fc7",
-            roomName: "Gregory Balistreri",
-            topic: "Forward Mobility Analyst",
-          },
-        },
-        {
-          node: {
-            id: "room_634fce71b734edfaf46da3b63db2a509",
-            roomName: "Denis FromIndia",
-            topic: "Forward Mobility Analyst",
-          },
-        },
-        {
-          node: {
-            id: "room_89bf05cc376c59fddd3682a3eea747e1",
-            roomName: "Vernie Bergstrom",
-            topic: "test manual review",
-          },
-        },
-        {
-          node: {
-            id: "room_040a4e34c0c3dc9c06fa7773f0f77f73",
-            roomName: "Ronnie Runolfsson",
-            topic: "test manual review",
-          },
-        },
-        {
-          node: {
-            id: "room_7f9dfbda6cef32e74becc6054e745235",
-            roomName: "Melodie Hackett",
-            topic: "Test manual review",
-          },
-        },
-      ],
+      list: null,
     };
   },
-  //   headers: {
-  //     Accept: "application/json",
-  //     Authentication: "Bearer Token",
-  //     "Bearer": "oauth2v2_7a4e0222c15d0a66af69759ad21d7730",
-  //   },
-
   mounted() {
-    fetch("https://76eb-78-162-150-126.ngrok-free.app/rooms?" + new URLSearchParams({ token: "Bearer oauth2v2_7a4e0222c15d0a66af69759ad21d7730"}), {
+    fetch("https://ea9c-78-162-150-126.ngrok-free.app/rooms?" + new URLSearchParams({ token: "Bearer oauth2v2_7a4e0222c15d0a66af69759ad21d7730"}), {
       method: "GET",
      headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type'
+      'ngrok-skip-browser-warning': true
       }
     }).then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((response) => this.list = response?.data?.roomList?.edges)
       .catch((err) => console.error(err));
   },
   methods: {
