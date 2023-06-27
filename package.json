@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=./",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/",
-    "deploy": "cd dist && cp index.html 404.html && cd .. && gh-pages -d dist"
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "mdb-vue-ui-kit": "^4.0.0",
