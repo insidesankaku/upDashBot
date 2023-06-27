@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
   app: {
-    baseURL: '/nuxt-github-pages/'
+    baseURL: '/up-dash-bot/'
   }
 })
