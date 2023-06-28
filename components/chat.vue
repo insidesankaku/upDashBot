@@ -17,6 +17,7 @@
           alt="avatar"
           class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
           width="60"
+          loading="lazy"
         />
         <div class="card" v-if="shortSenderName === message.node.user.name">
           <div class="card-header d-flex justify-content-between p-3">
@@ -58,6 +59,7 @@
           alt="avatar"
           class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong"
           width="60"
+          loading="lazy"
         />
       </li>
 
