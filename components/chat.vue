@@ -8,8 +8,8 @@
 
       <li
         class="d-flex justify-content-between mb-4"
-        v-for="message in messages"
-        :key="message.node.id"
+        v-for="message in messages.slice().reverse()"
+        :key="message.node.messageId"
       >
         <img
           v-if="shortSenderName === message.node.user.name"
@@ -68,12 +68,17 @@
           <textarea
             class="form-control"
             id="textAreaExample2"
-            rows="4"
+            v-model="message"
+            rows="3"
           ></textarea>
           <label class="form-label" for="textAreaExample2">Message</label>
         </div>
       </li>
-      <button type="button" class="btn btn-primary btn-rounded float-end">
+      <button
+        type="button"
+        class="btn btn-primary btn-rounded float-end"
+        @click="sendMessage"
+      >
         Send
       </button>
     </ul>
@@ -82,7 +87,7 @@
 </template>
 
 <script>
-import timeSince from '../helpers/helpers';
+import timeSince from "../helpers/helpers";
 export default {
   props: {
     chatId: {
@@ -93,6 +98,8 @@ export default {
   data() {
     return {
       room: null,
+      message: null,
+      mesageId: null,
     };
   },
   computed: {
@@ -110,8 +117,60 @@ export default {
       this.$emit("goBack", true);
     },
     getTimeSince(dateObj) {
-     return timeSince(dateObj);
-    }
+      return timeSince(dateObj);
+    },
+    addMessageToChat(messageData) {
+      this.room.stories.edges.unshift({
+        node: {
+          createdDateTime: messageData.createRoomStory.createdDateTime,
+          id: messageData.createRoomStory.id,
+          message: this.message,
+          messageId: this.messageId,
+          storyTemplate: null,
+          titleTemplate: null,
+          user: {
+            name: messageData.createRoomStory.user.name,
+            photoUrl: messageData.createRoomStory.user.photoUrl,
+            id: messageData.createRoomStory.user.id,
+          },
+        },
+      });
+
+      this.message = "";
+      this.messageId = null;
+    },
+    sendMessage() {
+      if (!this.message) {
+        return;
+      }
+
+      this.mesageId = "id" + Math.random().toString(19).slice(2);
+
+      fetch(
+        "https://8d0e-78-162-150-126.ngrok-free.app/rooms/" +
+          this.chatId +
+          "/stories",
+        {
+          method: "POST",
+          headers: {
+            "ngrok-skip-browser-warning": true,
+            Authorization: "Bearer oauth2v2_4ebae8c9336ae72076a77e30788c4be4",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: this.message,
+            messageId: this.mesageId,
+          }),
+        }
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          if (response.data) {
+            this.addMessageToChat(response.data);
+          }
+        })
+        .catch((err) => console.error(err));
+    },
   },
   mounted() {
     fetch(
