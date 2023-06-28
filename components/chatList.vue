@@ -29,12 +29,14 @@
                 />
                 <div class="pt-1">
                   <p class="fw-bold mb-0">{{ item.node.roomName }}</p>
-                  <p class="small text-muted">{{ item.node.topic }}</p>
+                  <p class="small text-muted">
+                    {{ truncateMessage(item.node.latestStory.message) }}
+                  </p>
                 </div>
               </div>
               <div class="pt-1">
-                <p class="small text-muted mb-1">Just now</p>
-                <span class="badge bg-danger float-end">1</span>
+                <p class="small text-muted mb-1">{{getTimeSince(item.node.latestStory.createdDateTime)}}</p>
+                <!-- <span class="badge bg-danger float-end">1</span> -->
               </div>
             </a>
           </li>
@@ -51,7 +53,7 @@
 
 <script>
 import chat from "./chat.vue";
-
+import timeSince from '../helpers/helpers';
 export default {
   components: {
     chat,
@@ -64,9 +66,9 @@ export default {
   },
   mounted() {
     fetch(
-      "https://ea9c-78-162-150-126.ngrok-free.app/rooms?" +
+      "https://8d0e-78-162-150-126.ngrok-free.app/rooms?" +
         new URLSearchParams({
-          token: "Bearer oauth2v2_7a4e0222c15d0a66af69759ad21d7730",
+          token: "Bearer oauth2v2_4ebae8c9336ae72076a77e30788c4be4",
         }),
       {
         method: "GET",
@@ -80,11 +82,19 @@ export default {
       .catch((err) => console.error(err));
   },
   methods: {
+    getTimeSince(dateObj) {
+     return timeSince(dateObj);
+    },
     openChat(chatId) {
       this.selectedChatId = chatId;
     },
     clearSelectedChatId() {
       this.selectedChatId = null;
+    },
+    truncateMessage(string = "", maxLength = 50) {
+      return string.length > maxLength
+        ? `${string.substring(0, maxLength)}…`
+        : string;
     },
   },
 };

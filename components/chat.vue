@@ -1,73 +1,66 @@
 <template>
-  <div class="col-md-6 col-lg-7 col-xl-8">
+  <div class="col-md-6 col-lg-7 col-xl-8" v-if="room">
     <button class="btn btn-info back-btn" @click="goBack()">Back</button>
     <ul class="list-unstyled">
-      <li class="d-flex justify-content-between mb-4">
+      <h5 class="font-weight-bold mb-3 text-center text-lg-start">
+        {{ room.roomName }}
+      </h5>
+
+      <li
+        class="d-flex justify-content-between mb-4"
+        v-for="message in messages"
+        :key="message.node.id"
+      >
         <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+          v-if="shortSenderName === message.node.user.name"
+          :src="message.node.user.photoUrl"
           alt="avatar"
           class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
           width="60"
         />
-        <div class="card">
+        <div class="card" v-if="shortSenderName === message.node.user.name">
           <div class="card-header d-flex justify-content-between p-3">
-            <p class="fw-bold mb-0">Brad Pitt</p>
+            <p class="fw-bold mb-0 margin-right-5">
+              {{ message.node.user.name }}
+            </p>
             <p class="text-muted small mb-0">
-              <i class="far fa-clock"></i> 12 mins ago
+              <i class="far fa-clock"></i>
+              {{ getTimeSince(message.node.createdDateTime) }} ago
             </p>
           </div>
           <div class="card-body">
             <p class="mb-0">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              {{ message.node.message }}
             </p>
           </div>
         </div>
-      </li>
-      <li class="d-flex justify-content-between mb-4">
-        <div class="card w-100">
+
+        <div
+          class="card w-100"
+          v-if="shortSenderName !== message.node.user.name"
+        >
           <div class="card-header d-flex justify-content-between p-3">
-            <p class="fw-bold mb-0">Lara Croft</p>
-            <p class="text-muted small mb-0">
-              <i class="far fa-clock"></i> 13 mins ago
+            <p class="fw-bold mb-0">{{ message.node.user.name }}</p>
+            <p class="text-muted small mb-0 margin-right-5">
+              <i class="far fa-clock"></i>
+              {{ getTimeSince(message.node.createdDateTime) }} ago
             </p>
           </div>
           <div class="card-body">
             <p class="mb-0">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium.
+              {{ message.node.message }}
             </p>
           </div>
         </div>
         <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp"
+          v-if="shortSenderName !== message.node.user.name"
+          :src="message.node.user.photoUrl"
           alt="avatar"
           class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong"
           width="60"
         />
       </li>
-      <li class="d-flex justify-content-between mb-4">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-          alt="avatar"
-          class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-          width="60"
-        />
-        <div class="card">
-          <div class="card-header d-flex justify-content-between p-3">
-            <p class="fw-bold mb-0">Brad Pitt</p>
-            <p class="text-muted small mb-0">
-              <i class="far fa-clock"></i> 10 mins ago
-            </p>
-          </div>
-          <div class="card-body">
-            <p class="mb-0">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
-      </li>
+
       <li class="bg-white mb-3">
         <div class="form-outline">
           <textarea
@@ -78,7 +71,7 @@
           <label class="form-label" for="textAreaExample2">Message</label>
         </div>
       </li>
-      <button type="button" class="btn btn-info btn-rounded float-end">
+      <button type="button" class="btn btn-primary btn-rounded float-end">
         Send
       </button>
     </ul>
@@ -86,6 +79,7 @@
 </template>
 
 <script>
+import timeSince from '../helpers/helpers';
 export default {
   props: {
     chatId: {
@@ -93,17 +87,36 @@ export default {
       default: null,
     },
   },
+  data() {
+    return {
+      room: null,
+    };
+  },
+  computed: {
+    messages() {
+      return this.room.stories.edges;
+    },
+    shortSenderName() {
+      const roomName = this.room.roomName;
+
+      return `${roomName.split(" ")[0]} ${roomName.split(" ")[1][0]}.`;
+    },
+  },
   methods: {
     goBack() {
       this.$emit("goBack", true);
     },
+    getTimeSince(dateObj) {
+     return timeSince(dateObj);
+    }
   },
   mounted() {
     fetch(
-      "https://ea9c-78-162-150-126.ngrok-free.app/rooms/" +
-        this.chatId + '?' +
+      "https://8d0e-78-162-150-126.ngrok-free.app/rooms/" +
+        this.chatId +
+        "/stories?" +
         new URLSearchParams({
-          token: "Bearer oauth2v2_7a4e0222c15d0a66af69759ad21d7730",
+          token: "Bearer oauth2v2_4ebae8c9336ae72076a77e30788c4be4",
         }),
       {
         method: "GET",
@@ -113,12 +126,15 @@ export default {
       }
     )
       .then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((response) => (this.room = response?.data?.room))
       .catch((err) => console.error(err));
   },
 };
 </script>
 <style scoped>
+.margin-right-5 {
+  margin-right: 5px;
+}
 .back-btn {
   margin-bottom: 20px;
 }
