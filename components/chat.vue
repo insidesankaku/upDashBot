@@ -76,6 +76,7 @@
       </button>
     </ul>
   </div>
+  <div v-else id="loading"></div>
 </template>
 
 <script>
