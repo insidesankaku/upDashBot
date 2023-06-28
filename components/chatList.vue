@@ -22,7 +22,7 @@
             <a href="#!" class="d-flex justify-content-between">
               <div class="d-flex flex-row">
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_WKLL_EXzfrLt6V_ZHhmge50SCp_4MGRUgeyJyt0&s"
                   alt="avatar"
                   class="rounded-circle d-flex align-self-center me-3 shadow-1-strong"
                   width="60"
@@ -35,7 +35,7 @@
                 </div>
               </div>
               <div class="pt-1">
-                <p class="small text-muted mb-1">{{getTimeSince(item.node.latestStory.createdDateTime)}}</p>
+                <p class="small text-muted mb-1 width-50">{{getTimeSince(item.node.latestStory.createdDateTime)}}</p>
                 <!-- <span class="badge bg-danger float-end">1</span> -->
               </div>
             </a>
@@ -101,6 +101,9 @@ export default {
 </script>
 
 <style scoped>
+.width-50 {
+  width: 50px;
+}
 .up-chat-item:hover {
   background-color: #eee;
 }
