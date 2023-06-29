@@ -34,10 +34,10 @@
                 </div>
               </div>
               <div class="pt-1">
-                <p class="small text-muted mb-1 width-50">
+                <p class="small text-muted mb-1 width-60">
                   {{ getTimeSince(item.node.latestStory.createdDateTime) }}
                 </p>
-                <!-- <span class="badge bg-danger float-end">1</span> -->
+                <span class="badge bg-danger float-end" v-if="item.node.numUnread > 0">{{item.node.numUnread}}</span>
               </div>
             </a>
           </li>
@@ -123,8 +123,8 @@ export default {
   z-index: 10;
 }
 
-.width-50 {
-  width: 50px;
+.width-60 {
+  width: 60px;
 }
 .up-chat-item:hover {
   background-color: #eee;
