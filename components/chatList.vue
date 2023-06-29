@@ -48,6 +48,7 @@
       :chatId="selectedChatId"
       v-if="selectedChatId"
       @goBack="clearSelectedChatId"
+      @messageSent="updateChat"
     />
   </div>
 </template>
@@ -63,26 +64,30 @@ export default {
     return {
       selectedChatId: null,
       list: null,
+      isNeedToUpdateChat: false,
     };
   },
   mounted() {
-    fetch(
-      "https://8d0e-78-162-150-126.ngrok-free.app/rooms?" +
-        new URLSearchParams({
-          token: "Bearer oauth2v2_4ebae8c9336ae72076a77e30788c4be4",
-        }),
-      {
-        method: "GET",
-        headers: {
-          "ngrok-skip-browser-warning": true,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => (this.list = response?.data?.roomList?.edges))
-      .catch((err) => console.error(err));
+    this.loadChats();
   },
   methods: {
+    loadChats() {
+      fetch(
+        "https://8d0e-78-162-150-126.ngrok-free.app/rooms?" +
+          new URLSearchParams({
+            token: "Bearer oauth2v2_4ebae8c9336ae72076a77e30788c4be4",
+          }),
+        {
+          method: "GET",
+          headers: {
+            "ngrok-skip-browser-warning": true,
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((response) => (this.list = response?.data?.roomList?.edges))
+        .catch((err) => console.error(err));
+    },
     getTimeSince(dateObj) {
       return timeSince(dateObj);
     },
@@ -91,11 +96,21 @@ export default {
     },
     clearSelectedChatId() {
       this.selectedChatId = null;
+
+      if (this.isNeedToUpdateChat) {
+        this.list = null;
+        this.isNeedToUpdateChat = false;
+
+        this.loadChats();
+      }
     },
     truncateMessage(string = "", maxLength = 50) {
       return string.length > maxLength
         ? `${string.substring(0, maxLength)}…`
         : string;
+    },
+    updateChat() {
+      this.isNeedToUpdateChat = true;
     },
   },
 };

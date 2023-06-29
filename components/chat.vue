@@ -169,6 +169,8 @@ export default {
         .then((response) => {
           if (response.data) {
             this.addMessageToChat(response.data);
+
+            this.$emit("messageSent", true);
           }
         })
         .catch((err) => console.error(err));
