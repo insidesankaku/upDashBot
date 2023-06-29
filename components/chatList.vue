@@ -1,7 +1,6 @@
 <template>
-  <div class="container py-5">
+  <div class="container py-3">
     <div id="loading" v-if="!list"></div>
-
     <div class="row" v-if="!selectedChatId">
       <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
         <h5 class="font-weight-bold mb-3 text-center text-lg-start">
@@ -35,7 +34,9 @@
                 </div>
               </div>
               <div class="pt-1">
-                <p class="small text-muted mb-1 width-50">{{getTimeSince(item.node.latestStory.createdDateTime)}}</p>
+                <p class="small text-muted mb-1 width-50">
+                  {{ getTimeSince(item.node.latestStory.createdDateTime) }}
+                </p>
                 <!-- <span class="badge bg-danger float-end">1</span> -->
               </div>
             </a>
@@ -53,7 +54,7 @@
 
 <script>
 import chat from "./chat.vue";
-import timeSince from '../helpers/helpers';
+import timeSince from "../helpers/helpers";
 export default {
   components: {
     chat,
@@ -83,7 +84,7 @@ export default {
   },
   methods: {
     getTimeSince(dateObj) {
-     return timeSince(dateObj);
+      return timeSince(dateObj);
     },
     openChat(chatId) {
       this.selectedChatId = chatId;
@@ -101,6 +102,12 @@ export default {
 </script>
 
 <style scoped>
+.up-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .width-50 {
   width: 50px;
 }

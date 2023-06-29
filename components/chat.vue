@@ -1,11 +1,13 @@
 <template>
   <div class="col-md-6 col-lg-7 col-xl-8" v-if="room">
-    <button class="btn btn-info back-btn" @click="goBack()">Back</button>
+    <div
+      class="up-sticky-header card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0 mb-4"
+    >
+      <i class="fas fa-angle-left" @click="goBack()"></i>
+      <p class="mb-0 fw-bold">{{ room.roomName }}</p>
+      <i class="fas fa-times" style="visibility: hidden"></i>
+    </div>
     <ul class="list-unstyled">
-      <h5 class="font-weight-bold mb-3 text-center text-lg-start">
-        {{ room.roomName }}
-      </h5>
-
       <li
         class="d-flex justify-content-between mb-4"
         v-for="message in messages.slice().reverse()"
@@ -64,19 +66,19 @@
       </li>
 
       <li class="bg-white mb-3">
-        <div class="form-outline">
+        <div>
           <textarea
             class="form-control"
             id="textAreaExample2"
             v-model="message"
+            placeholder="Message"
             rows="3"
           ></textarea>
-          <label class="form-label" for="textAreaExample2">Message</label>
         </div>
       </li>
       <button
         type="button"
-        class="btn btn-primary btn-rounded float-end"
+        class="btn btn-info btn-rounded float-end mb-5"
         @click="sendMessage"
       >
         Send
@@ -188,7 +190,13 @@ export default {
       }
     )
       .then((response) => response.json())
-      .then((response) => (this.room = response?.data?.room))
+      .then((response) => {
+        this.room = response?.data?.room;
+
+        setTimeout(() => {
+          window.scrollTo(0, document.body.scrollHeight);
+        });
+      })
       .catch((err) => console.error(err));
   },
 };
