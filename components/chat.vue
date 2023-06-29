@@ -182,7 +182,7 @@ export default {
         this.chatId +
         "/stories?" +
         new URLSearchParams({
-          token: "Bearer oauth2v2_4ebae8c9336ae72076a77e30788c4be4",
+          token: "Bearer oauth2v2_5f556ea071736fb9d5e96a5f597c5be5",
         }),
       {
         method: "GET",
